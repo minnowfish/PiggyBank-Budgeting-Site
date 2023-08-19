@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budgeting App</title>
+    <style>
+        body {
+            font-family: Tahoma, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            font-family: Georgia, serif;
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        button[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+<body>
+  <div id="data-container">
+    <header>
+        <h1>Budgeting App</h1>
+    </header>
+    <div class="container">
+        <h2>ADD AN INCOME</h2>
+        <form id="income-form">
+            <label for="income-source">Income Source:</label>
+            <input type="text" id="income-source" required>
+
+            <label for="income-amount">Income Amount:</label>
+            <input type="number" id="income-amount" required>
+
+            <button type="submit">Add Income</button>
+        </form>
+
+        <br>
+        <br>
+      
+        <h2>ADD AN EXPENSE</h2>
+        <form id="expense-form">
+            <label for="expense-name">Expense Name:</label>
+            <input type="text" id="expense-name" required>
+
+            <label for="expense-amount">Expense Amount:</label>
+            <input type="number" id="expense-amount" required>
+
+            <button type="submit">Add Expense</button>
+        </form>
+
+        <br>
+        <br>
+      
+        <h2>INCOME LIST</h2>
+        <ul id="income-list">
+            <!-- Income items will be added here -->
+        </ul>
+        <h2>Total Income: RM<span id="total-income">0.00</span></h2>
+
+        <br>
+      
+        <h2>EXPENSE LIST</h2>
+        <ul id="expense-list">
+            <!-- Expense items will be added here -->
+        </ul>
+        <h2>Total Expenses: RM<span id="total-expenses">0.00</span></h2>
+      
+        <br>
+        
+        <h2>BALANCE: RM<span id="balance">0.00</span></h2>
+    </div>
+  </div>
+    <script>
+
+      fetch("/get_data")
+      .then(response => response.json())
+      .then(data => {
+        // Process and use the fetched data in your JavaScript code
+        console.log(data);
+
+        // Call functions to update the displayed data
+        displayFinalBalance(data);
+        displayIncome(data);
+    })
+    .catch(error => console.error("Error fetching data:", error));
+        // JavaScript code for handling income and expense forms
+        const incomeForm = document.getElementById("income-form");
+        const expenseForm = document.getElementById("expense-form");
+        const incomeList = document.getElementById("income-list");
+        const expenseList = document.getElementById("expense-list");
+        const totalIncome = document.getElementById("total-income");
+        const totalExpenses = document.getElementById("total-expenses");
+        const balance = document.getElementById("balance");
+
+        incomeForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const incomeSource = document.getElementById("income-source").value;
+            const incomeAmount = parseFloat(document.getElementById("income-amount").value);
+
+            if (!incomeSource || isNaN(incomeAmount)) {
+                alert("Please fill out both fields with valid values.");
+                return;
+            }
+
+            const listItem = document.createElement("li");
+            listItem.textContent = `${incomeSource}: $${incomeAmount.toFixed(2)}`;
+            incomeList.appendChild(listItem);
+
+            const currentTotalIncome = parseFloat(totalIncome.textContent);
+            totalIncome.textContent = (currentTotalIncome + incomeAmount).toFixed(2);
+
+            updateBalance();
+            incomeForm.reset();
+        });
+
+        expenseForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const expenseName = document.getElementById("expense-name").value;
+            const expenseAmount = parseFloat(document.getElementById("expense-amount").value);
+
+            if (!expenseName || isNaN(expenseAmount)) {
+                alert("Please fill out both fields with valid values.");
+                return;
+            }
+
+            const listItem = document.createElement("li");
+            listItem.textContent = `${expenseName}: $${expenseAmount.toFixed(2)}`;
+            expenseList.appendChild(listItem);
+
+            const currentTotalExpenses = parseFloat(totalExpenses.textContent);
+            totalExpenses.textContent = (currentTotalExpenses + expenseAmount).toFixed(2);
+
+            updateBalance();
+            expenseForm.reset();
+        });
+
+        function updateBalance() {
+            const income = parseFloat(totalIncome.textContent);
+            const expenses = parseFloat(totalExpenses.textContent);
+            balance.textContent = (income - expenses).toFixed(2);
+        }
+
+      function displayFinalBalance(data) {
+    const finalBalance = document.getElementById("final-balance");
+    finalBalance.textContent = `${data[0].final_bal.toFixed(2)}`;
+}
+
+function displayIncome(data) {
+    const incomeName = document.getElementById("income-name");
+    const incomeValue = document.getElementById("income-value");
+    incomeName.textContent = data[0].income_name;
+    incomeValue.textContent = `${data[0].income_value.toFixed(2)}`;
+}
+    </script>
+    
+</body>
+</html>
