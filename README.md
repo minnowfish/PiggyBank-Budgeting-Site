@@ -1,5 +1,17 @@
-# Running dev server
-To develop - run `make dev` to get a development server with a reloader
+# What it does
+A virtual piggy bank, a small application made to aid in everyday financial planning. Using our app, users can manage their finances easier and more efficiently with our simple UI. Budgeting has never been easier. 
 
-# Running prod server
-Press the run button, or `make prod`
+# Setup and Excecution
+On the GitHub page, click on Code. 
+Click on Download ZIP.
+Wait for the ZIP file to download.
+Extract the ZIP file.
+Open your IDE of choice.
+Open the extracted ZIP File in the IDE.
+Run the program.
+You are now free to use the program.
+
+# Technologies/Tools Used
+Replit
+FastAPI
+SQLite

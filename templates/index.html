@@ -90,7 +90,7 @@
         <ul id="income-list">
             <!-- Income items will be added here -->
         </ul>
-        <h2>Total Income: RM<span id="total-income">0.00</span></h2>
+        <h2>Total Income: $<span id="total-income">0.00</span></h2>
 
         <br>
       
@@ -98,11 +98,11 @@
         <ul id="expense-list">
             <!-- Expense items will be added here -->
         </ul>
-        <h2>Total Expenses: RM<span id="total-expenses">0.00</span></h2>
+        <h2>Total Expenses: $<span id="total-expenses">0.00</span></h2>
       
         <br>
         
-        <h2>BALANCE: RM<span id="balance">0.00</span></h2>
+        <h2>BALANCE: $<span id="balance">0.00</span></h2>
     </div>
   </div>
     <script>
@@ -110,7 +110,7 @@
       fetch("/get_data")
       .then(response => response.json())
       .then(data => {
-        // Process and use the fetched data in your JavaScript code
+        // Process and use the fetched data in JavaScript
         console.log(data);
 
         // Call functions to update the displayed data

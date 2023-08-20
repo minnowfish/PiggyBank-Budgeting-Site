@@ -6,13 +6,12 @@ import sqlite3
 connection = sqlite3.connect("my_database")
 
 connection.execute('''CREATE TABLE IF NOT EXISTS userData (
-date TEXT, 
-current_bal INTEGER, 
 expense_name STRING, 
 expense_value INTEGER, 
 income_name STRING, 
 income_value INTEGER, 
 final_bal INTEGER);''')
+
 
 
 app = FastAPI()
