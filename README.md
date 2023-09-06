@@ -1,3 +1,5 @@
+# Empower Hacks 2023 Submission
+
 # What it does
 A virtual piggy bank, a small application made to aid in everyday financial planning. Using our app, users can manage their finances easier and more efficiently with our simple UI. Budgeting has never been easier. 
 
