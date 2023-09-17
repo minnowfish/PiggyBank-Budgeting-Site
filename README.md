@@ -20,9 +20,9 @@ FastAPI
 SQLite
 
 # Team SOYA
-Syabbil (Frontend, Video Editor) - Philosophy creative writer and creative director.
-Owen (Backend, Support) - IGCSE Computer Science Student.
-Yan Yie (Frontend, Creator of User Guide) - An ambitious student with a passion for Computer Science and learning foreign languages.
-Ashlyn (Backend, Leader) - A sixth form student with an interest in backend software development.
+- Syabbil (Frontend, Video Editor) - Philosophy creative writer and creative director.
+- Owen (Backend, Support) - IGCSE Computer Science Student.
+- Yan Yie (Frontend, Creator of User Guide) - An ambitious student with a passion for Computer Science and learning foreign languages.
+- Ashlyn (Backend, Leader) - A sixth form student with an interest in backend software development.
 
 
